@@ -1,8 +1,19 @@
 package com.example.letsdoit;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class taskModel {
+
+    @PrimaryKey(autoGenerate = true)
     private int id;
+
+    @ColumnInfo(name = "status")
     private boolean status;
+
+    @ColumnInfo(name = "task")
     private String task;
 
     public taskModel(int id, boolean status, String task) {

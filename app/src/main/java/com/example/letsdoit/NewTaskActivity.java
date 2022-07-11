@@ -18,7 +18,8 @@ public class NewTaskActivity extends AppCompatActivity {
     String newTask;
     private ActivityNewTaskBinding binding;
 
-    SQLiteDatabase database;
+
+
 
 
     @Override
@@ -38,7 +39,9 @@ public class NewTaskActivity extends AppCompatActivity {
                 //MainActivity'e dönüş.
                 Intent intent = new Intent(NewTaskActivity.this,MainActivity.class);
 
-                intent.putExtra("newTask",newTask);
+                String task = binding.editText.getText().toString();
+
+                intent.putExtra("newTask",task);
                 startActivity(intent);
 
             }
@@ -51,45 +54,7 @@ public class NewTaskActivity extends AppCompatActivity {
 
     }
 
-    public void save(View view){
 
-        String task = binding.editText.getText().toString();
-
-        try {
-
-            SQLiteDatabase database = this.openOrCreateDatabase("Tasks",MODE_PRIVATE,null);
-            database.execSQL("CREATE TABLE IF NOT EXISTS tasks(task VARCHAR, status VARCHAR, id INTEGER PRIMARY KEY)");
-
-            ContentValues values = new ContentValues();
-
-            //values.put(task,);
-
-
-            /*String sqlString = "INSERT INTO tasks(task, status) VALUES(?, ?)";
-            SQLiteStatement sqLiteStatement = database.compileStatement(sqlString);
-            sqLiteStatement.bindString(1,task);
-            sqLiteStatement.bindString(2,stat);
-
-
-
-            sqLiteStatement.execute();*/
-
-        } catch (Exception e){
-
-            e.printStackTrace();
-        }
-
-        //MainActivity'e dönüş.
-        Intent intent = new Intent(NewTaskActivity.this,MainActivity.class);
-
-        intent.putExtra("newTask",newTask);
-        startActivity(intent);
-
-
-
-
-
-    }
 
 }
 

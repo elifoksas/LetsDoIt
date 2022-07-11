@@ -19,10 +19,13 @@ public class MainActivity extends AppCompatActivity {
 
 
     private RecyclerView recyclerView;
+    private taskDatabase db;
     taskAdapter adapter;
     ArrayList<taskModel> arrayList;
 
     private ActivityMainBinding binding;
+    private taskDatabase taskDao;
+
 
 
     @Override
@@ -40,16 +43,20 @@ public class MainActivity extends AppCompatActivity {
 
         adapter=new taskAdapter(arrayList);
 
-        arrayList.add(new taskModel(1,false,"test"));
-        arrayList.add(new taskModel(2,false,"testtask1"));
-        arrayList.add(new taskModel(3,false,"testtask2"));
-        arrayList.add(new taskModel(4,true,"true"));
+
+
+
 
         recyclerView.setAdapter(adapter);
 
         //newTask activity'den gelen new task'i alıyoruz.
         Intent intent = getIntent();
         String newTask = intent.getStringExtra("newTask");
+
+        arrayList.add(new taskModel(1,true,newTask));
+        SaveData(arrayList);
+        //arrayList.addAll(taskDao.taskDao().getAll());
+
 
 
 
@@ -67,10 +74,18 @@ public class MainActivity extends AppCompatActivity {
        });
 
 
+
+
     }
 
+    private void SaveData(ArrayList<taskModel> taskModels){
+        taskDatabase.getDatabase(this);
+
+    }
     private void GetData(){
         //verileri çekiyoruz.
+        //taskDao= db.taskDao();
+
     }
 
 }
